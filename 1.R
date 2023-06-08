@@ -13,5 +13,5 @@ print(which(cumsum((paran == "(") * 2 - 1) == -1)[1])
 
 # Better read
 
-strsplit(scan("input1","character"),"")[[1]] %>%
-  match(c(")","","(")) - 2
+strsplit(scan("input1", "character"), "")[[1]] %>%
+  match(c(")", "", "(")) - 2
