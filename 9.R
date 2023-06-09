@@ -27,7 +27,11 @@ for (i in 3:length(city))
     mutate(curr_dist = curr_dist + dist) %>%
     mutate(curr_pos = dst) %>%
     mutate(visited = visited + 2^as.numeric(dst)) %>%
-    select(-dst, -dist)
+    select(-dst, -dist) %>%
+    group_by(visited, curr_pos) %>%
+    arrange(desc(curr_dist)) %>%
+    slice(1) %>%
+    ungroup
 print(trajects %>%
   arrange(desc(curr_dist)) %>%
   slice(1) %>%
