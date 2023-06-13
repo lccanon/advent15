@@ -9,8 +9,8 @@ distances <- dd %>%
   mutate(dst = src) %>%
   mutate(src = tmp) %>%
   select(-tmp) %>%
-  mutate(src = factor(src, city)) %>%
-  mutate(dst = factor(dst, city)) %>%
+  mutate(src = factor(src, levels(city))) %>%
+  mutate(dst = factor(dst, levels(city))) %>%
   rbind(dd)
 
 trajects <- distances %>%
