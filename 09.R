@@ -28,14 +28,12 @@ for (i in 3:length(city))
     mutate(curr_pos = dst) %>%
     mutate(visited = visited + 2^as.numeric(dst)) %>%
     select(-dst, -dist) %>%
+    # optimization to prune inefficient solutions
     group_by(visited, curr_pos) %>%
-    arrange(desc(curr_dist)) %>%
-    slice(1) %>% # optimization to prune inefficient solutions
-    ungroup
-print(trajects %>%
-  arrange(desc(curr_dist)) %>%
-  slice(1) %>%
-  select(curr_dist))
+    summarise(curr_dist = max(curr_dist), .groups = 'drop')
+trajects %>%
+  summarise(distance = max(curr_dist)) %>%
+  print
 
 # Visualization
 library("igraph")
