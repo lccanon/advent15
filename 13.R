@@ -8,7 +8,7 @@ hp <- read_delim("input13", delim = " ",
   mutate(name2 = str_extract(name2, "[^\\.]*")) %>%
   select(-gain) %>%
   mutate(name1 = factor(name1)) %>%
-  mutate(name2 = factor(name2))
+  mutate(name2 = factor(name2, levels(name1)))
 
 person <- unique(hp$name1)
 hp <- hp %>%
