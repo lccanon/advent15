@@ -46,4 +46,5 @@ seating <- seating %>%
   select(-happy.next)
 seating %>%
   summarise(happy = max(happy)) %>%
+  pull %>%
   print
