@@ -24,21 +24,18 @@ ingre <- readLines("input15") %>%
 # print(prod_max)
 
 library(partitions)
-comps <- t(compositions(100, nrow(ingre)))
+comps <- t(compositions(100, nrow(ingre))) %>%
+  as.matrix
 colnames(comps) <- ingre$name
-comps <- comps %>%
-  as.matrix %>%
-  as.tibble
 
-for (prop in names(ingre)[-1]) {
-  comps <- comps %>%
-    mutate(prop = apply(as.matrix(comps[,1:nrow(ingre)]) %*% as.matrix(select(ingre, all_of(prop))), 1, sum)) %>%
-    rename_with(~ prop, prop)
-}
-comps[comps < 0] <- 0
-comps <- comps %>%
-  mutate(value = apply(select(comps, names(ingre)[-1] %>% head(-1)), 1, prod))
-comps %>%
+value <- list()
+for (prop in names(ingre)[-1])
+  value[[prop]] <- apply(comps %*% as.matrix(select(ingre, all_of(prop))), 1, sum)
+value <- as_tibble(value)
+value[value < 0] <- 0
+value <- value %>%
+  mutate(value = apply(select(value, -calories), 1, prod))
+value %>%
   filter(calories == 500) %>%
   summarise(prod_max = max(value)) %>%
   pull
