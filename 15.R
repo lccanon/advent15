@@ -7,22 +7,6 @@ ingre <- readLines("input15") %>%
   separate(col = ".", into = c("name", "capacity", "durability", "flavor", "texture", "calories"), sep = ",") %>%
   mutate_at(-1, as.integer)
 
-# prod_max <- 0
-# for (i in 0:100) {
-#   print(c(i, prod_max))
-#   for (j in 0:(100 - i))
-#     for (k in 0:(100 - i - j)) {
-#       l <- 100  - i - j - k
-#       cal <- sum(t(c(i, j, k, l)) * ingre[,"calories"])
-#       if (cal != 500)
-#         next
-#       curr <- prod(apply(t(c(i, j, k, l)) * select(ingre, -name, -calories), 2,
-#                          function(x) max(0, sum(x))))
-#       prod_max <- max(curr, prod_max)
-#     }
-# }
-# print(prod_max)
-
 library(partitions)
 comps <- t(compositions(100, nrow(ingre))) %>%
   as.matrix
