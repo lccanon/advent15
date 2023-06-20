@@ -36,7 +36,7 @@ trajects %>%
   print
 
 # Visualization
-library("igraph")
+library(igraph)
 # dd <- dd %>% filter(dist < 100)
 g <- graph_from_edgelist(as.matrix(dd[,c("src", "dst")]),
                          directed = FALSE) %>%
