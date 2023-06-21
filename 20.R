@@ -20,11 +20,11 @@ print(i)
 
 # Actual solution (run in reasonable time, O(nlog(n)), instead of
 # O(n^2) above)
-
-house <- rep(0, number)
-for (i in 1:number) {
-  # idx <- seq(from = i, to = number, by = i)
+house <- rep(0, number / 10)
+for (i in seq_along(house)) {
+  # idx <- seq(from = i, to = length(house), by = i)
   idx <- seq(from = i, by = i, length.out = 50)
+  idx <- idx[idx < length(house)]
   house[idx] <- house[idx] + i
   if (11 * house[i] >= number)
     break
