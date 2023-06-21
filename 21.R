@@ -25,7 +25,8 @@ Platemail   102     0       5" %>%
   unlist %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Cost", "Damage", "Armor")) %>%
-  mutate_at(2:4, as.integer) -> armors
+  mutate_at(2:4, as.integer) %>%
+  rbind(0) -> armors
 
 "Damage +1    25     1       0
 Damage +2    50     2       0
@@ -38,23 +39,20 @@ Defense +3   80     0       3" %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Effect", "Cost", "Damage", "Armor")) %>%
   select(-Effect) %>%
-  mutate_at(2:4, as.integer) -> rings
+  mutate_at(2:4, as.integer) %>%
+  rbind(0) %>%
+  rbind(0) -> rings
 
 min_cost <- sum(c(weapons$Cost, armors$Cost, rings$Cost))
 max_cost <- 0
 for (weap in 1:nrow(weapons))
-  for (arm in 0:nrow(armors))
-    for (ring1 in 0:nrow(rings))
-      for (ring2 in ring1:nrow(rings)) {
-        if (ring1 != 0 && ring1 == ring2)
-          next
-        equip <- weapons[weap,]
-        if (arm != 0)
-          equip <- rbind(equip, armors[arm,])
-        if (ring1 != 0)
-          equip <- rbind(equip, rings[ring1,])
-        if (ring2 != 0)
-          equip <- rbind(equip, rings[ring2,])
+  for (arm in 1:nrow(armors))
+    for (ring1 in 1:(nrow(rings) - 1))
+      for (ring2 in (ring1 + 1):nrow(rings)) {
+        equip <- weapons[weap,] %>%
+          rbind(armors[arm,]) %>%
+          rbind(rings[ring1,]) %>%
+          rbind(rings[ring2,])
         cost <- sum(equip$Cost)
         damage <- sum(equip$Damage)
         armor <- sum(equip$Armor)
