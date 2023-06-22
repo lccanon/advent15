@@ -10,8 +10,8 @@ insts <- readLines("input6") %>%
 n <- 1000
 lights <- matrix(0, nrow = n, ncol = n)
 for (i in 1:nrow(insts)) {
-  index_i <- pull(insts[i,], x1):pull(insts[i,], x2) + 1
-  index_j <- pull(insts[i,], y1):pull(insts[i,], y2) + 1
+  index_i <- insts[i,]$x1:insts[i,]$x2 + 1
+  index_j <- insts[i,]$y1:insts[i,]$y2 + 1
   if (insts[i,"action"] == "on")
     lights[index_i,index_j] <- lights[index_i,index_j] + 1
   else if (insts[i,"action"] == "off")

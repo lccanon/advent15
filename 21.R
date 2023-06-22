@@ -56,13 +56,13 @@ for (weap in 1:nrow(weapons))
         cost <- sum(equip$Cost)
         damage <- sum(equip$Damage)
         armor <- sum(equip$Armor)
-        player_to_boss <- max(1, damage - pull(boss, Armor))
-        boss_to_player <- max(1, pull(boss, Damage) - armor)
+        player_to_boss <- max(1, damage - boss$Armor)
+        boss_to_player <- max(1, boss$Damage - armor)
         if (ceiling(player_hit_points / boss_to_player) >=
-            ceiling(pull(boss, "Hit Points") / player_to_boss))
+            ceiling(boss$`Hit Points` / player_to_boss))
           min_cost <- min(min_cost, cost)
         if (ceiling(player_hit_points / boss_to_player) <
-            ceiling(pull(boss, "Hit Points") / player_to_boss))
+            ceiling(boss$`Hit Points` / player_to_boss))
           max_cost <- max(max_cost, cost)
       }
 print(min_cost)
