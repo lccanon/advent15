@@ -5,12 +5,12 @@ liters <- read_delim("input17", delim = " ",
                     col_names = "liter")
 
 comb <- array(0, dim = c(nrow(liters), L, nrow(liters)))
-lit <- pull(liters[1,])
+lit <- liters[1,]$liter
 comb[1,lit,1] <- 1
 for (j in 1:L)
   for (i in 2:nrow(liters))
     for (k in 1:nrow(liters)) {
-      lit <- pull(liters[i,])
+      lit <- liters[i,]$liter
       # Basic case : we do not take element i
       comb[i,j,k] <- comb[i - 1,j,k]
       if (j - lit == 0 && k == 1)

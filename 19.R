@@ -33,16 +33,16 @@ i <- str_length(str)
 op <- 0
 while (str_length(str) != 1) {
   for (j in 1:nrow(eq)) {
-    pat <- pull(eq[j,], to)
+    pat <- eq[j,]$to
     if (str_sub(str, i, i + str_length(pat) - 1) != pat)
       next
-    str <- str_replace(str, pat, pull(eq[j,], from))
+    str <- str_replace(str, pat, eq[j,]$from)
     op <- op + 1
     i <- str_length(str)
     break
   }
   i <- i - 1
-  print(c(i, str_length(str)))
+  # print(c(i, str_length(str)))
 }
 print(op)
 
