@@ -14,7 +14,7 @@ Greataxe     74     8       0" %>%
   unlist %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Cost", "Damage", "Armor")) %>%
-  mutate_at(2:4, as.integer) -> weapons
+  mutate_at(-1, as.integer) -> weapons
 
 "Leather      13     0       1
 Chainmail    31     0       2
@@ -25,7 +25,7 @@ Platemail   102     0       5" %>%
   unlist %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Cost", "Damage", "Armor")) %>%
-  mutate_at(2:4, as.integer) %>%
+  mutate_at(-1, as.integer) %>%
   rbind(0) -> armors
 
 "Damage +1    25     1       0
@@ -36,10 +36,10 @@ Defense +2   40     0       2
 Defense +3   80     0       3" %>%
   str_split("\\n") %>%
   unlist %>%
+  str_replace(" \\+", "\\+") %>%
   tibble %>%
-  separate(col = ".", into = c("Name", "Effect", "Cost", "Damage", "Armor")) %>%
-  select(-Effect) %>%
-  mutate_at(2:4, as.integer) %>%
+  separate(col = ".", into = c("Name", "Cost", "Damage", "Armor"), sep = "\\s+") %>%
+  mutate_at(-1, as.integer) %>%
   rbind(0) %>%
   rbind(0) -> rings
 
