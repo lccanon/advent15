@@ -14,7 +14,7 @@ find_combn_sum <- function(x, m, s) {
 check_divisible <- function(x, n) {
   s <- sum(x) / n
   comb.range <- (1:length(x))[cumsum(x) < s & cumsum(rev(x)) > s]
-  for (i in subComb.range) {
+  for (i in comb.range) {
     combs <- find_combn_sum(x, i, s)
     if (nrow(combs) == 0)
       next
