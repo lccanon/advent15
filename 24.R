@@ -1,7 +1,4 @@
 library(tidyverse)
-
-read_csv("input24", col_names = FALSE) %>% unlist() -> weights
-
 library(combinat)
 
 # Find all combinations of vector x of size m with sum s
@@ -13,8 +10,8 @@ find_combn_sum <- function(x, m, s) {
 # Check that vector x can be divided equally in n parts
 check_divisible <- function(x, n) {
   s <- sum(x) / n
-  comb.range <- (1:length(x))[cumsum(x) < s & cumsum(rev(x)) > s]
-  for (i in comb.range) {
+  comb.range <- seq_along(x)[cumsum(x) < s & cumsum(rev(x)) > s]
+  for (i in comb.range[comb.range <= length(x) / n]) {
     combs <- find_combn_sum(x, i, s)
     if (nrow(combs) == 0)
       next
@@ -29,10 +26,12 @@ check_divisible <- function(x, n) {
   return(FALSE)
 }
 
+read_csv("input24", col_names = FALSE) %>% unlist() -> weights
+
 N <- 3
 s <- sum(weights) / N
-comb.range <- (1:length(weights))[cumsum(weights) < s & cumsum(rev(weights)) > s]
-for (i in comb.range) {
+comb.range <- seq_along(weights)[cumsum(weights) < s & cumsum(rev(weights)) > s]
+for (i in comb.range[comb.range <= length(weights) / N]) {
   combs <- find_combn_sum(weights, i, s)
   combs <- combs[order(apply(combs, 1, prod)),]
   for (j in seq_len(nrow(combs))) {
