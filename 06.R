@@ -1,6 +1,6 @@
 library(tidyverse)
 
-insts <- readLines("input6") %>%
+insts <- readLines("input01") %>%
   str_replace("turn ", "") %>%
   str_replace(" through ", ",") %>%
   str_replace(" ", ",") %>%

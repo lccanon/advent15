@@ -1,6 +1,6 @@
 library(tidyverse)
 
-dd <- read_delim("input9", delim = " ",
+dd <- read_delim("input01", delim = " ",
                  col_names = c("src", "X1", "dst", "X2", "dist")) %>%
   select(-X1, -X2)
 city <- factor(unique(c(dd$src, dd$dst)))

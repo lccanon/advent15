@@ -1,6 +1,6 @@
 library(tidyverse)
 
-strs <- readLines("input8")
+strs <- readLines("input01")
 sum(map_int(strs, str_length)) -
   strs %>%
   str_replace_all("\\\\x[0-9a-f]{2}", "X") %>%
