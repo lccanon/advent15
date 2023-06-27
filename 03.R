@@ -25,7 +25,7 @@ get_mat <- function(dir) {
   mat
 }
 
-dir <- (scan("input3", character(0)) %>%
+dir <- (scan("input01", character(0)) %>%
           str_split(""))[[1]]
 
 dir_santa <- dir[seq(1, length(dir), 2)]

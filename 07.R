@@ -1,6 +1,6 @@
 library(tidyverse)
 
-insts <- readLines("input7") %>%
+insts <- readLines("input01") %>%
   str_replace(".* b$", "46065 -> b") %>%
   str_replace_all("([a-z]{1,2}) ", "as.numeric(vars[[\"\\1\"]]) ") %>%
   str_replace("([a-z]{1,2})$", "vars[[\"\\1\"]]") %>%

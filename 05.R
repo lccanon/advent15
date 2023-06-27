@@ -1,6 +1,6 @@
 library(tidyverse)
 
-strs <- readLines("input5")
+strs <- readLines("input01")
 
 print(sum(str_detect(strs, "[aeiou].*[aeiou].*[aeiou]") &
             !str_detect(strs, "ab|cd|pq|xy") &
