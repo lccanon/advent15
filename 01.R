@@ -1,9 +1,9 @@
 library(tidyverse)
 
-paran <- (readLines("input01") %>%
-            str_split(""))[[1]]
+read_file("input01") %>%
+  str_split("", simplify = TRUE) -> paran
 print(sum(paran == "(") - sum(paran == ")"))
-print(which(cumsum((paran == "(") * 2 - 1) == -1)[1])
+print(which(cumsum(match(paran, c(")", "", "(")) - 2) == -1)[1])
 
 # Better read
 
