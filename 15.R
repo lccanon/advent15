@@ -9,8 +9,8 @@ ingre <- readLines("input15") %>%
 
 library(partitions)
 comps <- t(compositions(100, nrow(ingre))) %>%
-  as.matrix
-colnames(comps) <- ingre$name
+  as.matrix %>%
+  `colnames<-` (ingre$name)
 
 value <- list()
 for (prop in names(ingre)[-1])
