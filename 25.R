@@ -1,8 +1,7 @@
 library(tidyverse)
 library(gmp)
 
-library(microbenchmark)
-microbenchmark({
+microbenchmark::microbenchmark({
 
 readLines("input25") %>% str_extract_all("\\d+") %>% unlist %>% as.integer -> inst
 row <- inst[1]
