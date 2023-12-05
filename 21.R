@@ -10,8 +10,7 @@ Shortsword   10     5       0
 Warhammer    25     6       0
 Longsword    40     7       0
 Greataxe     74     8       0" %>%
-  str_split("\\n") %>%
-  unlist %>%
+  str_split_1("\\n") %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Cost", "Damage", "Armor")) %>%
   mutate_at(-1, as.integer) -> weapons
@@ -21,8 +20,7 @@ Chainmail    31     0       2
 Splintmail   53     0       3
 Bandedmail   75     0       4
 Platemail   102     0       5" %>%
-  str_split("\\n") %>%
-  unlist %>%
+  str_split_1("\\n") %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Cost", "Damage", "Armor")) %>%
   mutate_at(-1, as.integer) %>%
@@ -34,8 +32,7 @@ Damage +3   100     3       0
 Defense +1   20     0       1
 Defense +2   40     0       2
 Defense +3   80     0       3" %>%
-  str_split("\\n") %>%
-  unlist %>%
+  str_split_1("\\n") %>%
   str_replace(" \\+", "\\+") %>%
   tibble %>%
   separate(col = ".", into = c("Name", "Cost", "Damage", "Armor"), sep = "\\s+") %>%

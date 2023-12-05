@@ -10,8 +10,7 @@ goldfish: 5
 trees: 3
 cars: 2
 perfumes: 1" %>%
-  strsplit("\\n") %>%
-  unlist %>%
+  str_split_1("\\n") %>%
   tibble %>%
   separate(col = ".", into = c("name", "quant"), sep = ": ") %>%
   mutate_at(2, as.integer) -> const

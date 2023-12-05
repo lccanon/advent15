@@ -9,8 +9,7 @@ head(data, -2) %>%
   mutate(len = str_length(to)) -> eq
 
 str <- tail(data, 1) %>%
-  str_split("") %>%
-  unlist
+  str_split_1("")
 
 res <- list()
 for (i in 1:length(str)) {
